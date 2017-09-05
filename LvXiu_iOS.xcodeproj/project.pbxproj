@@ -13,6 +13,7 @@
 		093E368F1F5E4C2F0012C05F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 093E368D1F5E4C2F0012C05F /* Main.storyboard */; };
 		093E36911F5E4C2F0012C05F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 093E36901F5E4C2F0012C05F /* Assets.xcassets */; };
 		093E36941F5E4C2F0012C05F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 093E36921F5E4C2F0012C05F /* LaunchScreen.storyboard */; };
+		093E36AB1F5EB9650012C05F /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 093E36AA1F5EB9650012C05F /* JavaScriptCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,8 @@
 		093E36901F5E4C2F0012C05F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		093E36931F5E4C2F0012C05F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		093E36951F5E4C2F0012C05F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		093E36AA1F5EB9650012C05F /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		093E36AD1F5EBDA70012C05F /* LvXiu.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LvXiu.pch; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +36,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				093E36AB1F5EB9650012C05F /* JavaScriptCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,6 +48,7 @@
 			children = (
 				093E36831F5E4C2F0012C05F /* LvXiu_iOS */,
 				093E36821F5E4C2F0012C05F /* Products */,
+				093E36A91F5EB9650012C05F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -75,8 +80,17 @@
 			isa = PBXGroup;
 			children = (
 				093E36851F5E4C2F0012C05F /* main.m */,
+				093E36AD1F5EBDA70012C05F /* LvXiu.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		093E36A91F5EB9650012C05F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				093E36AA1F5EB9650012C05F /* JavaScriptCore.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -110,7 +124,8 @@
 				TargetAttributes = {
 					093E36801F5E4C2F0012C05F = {
 						CreatedOnToolsVersion = 8.3.3;
-						ProvisioningStyle = Automatic;
+						DevelopmentTeam = S58CK2GNVZ;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -272,10 +287,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = S58CK2GNVZ;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/LvXiu_iOS/LvXiu.pch";
 				INFOPLIST_FILE = LvXiu_iOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "longrise.LvXiu-iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "LvXiu-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "484e5e92-9367-4ba8-828e-c414dab33bd9";
+				PROVISIONING_PROFILE_SPECIFIER = LvXiuDevProfile;
 			};
 			name = Debug;
 		};
@@ -283,10 +303,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = S58CK2GNVZ;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/LvXiu_iOS/LvXiu.pch";
 				INFOPLIST_FILE = LvXiu_iOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "longrise.LvXiu-iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "LvXiu-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "d3ee6f6d-1873-4716-ba01-3f96c058fc8c";
+				PROVISIONING_PROFILE_SPECIFIER = LvXiuDisProfile;
 			};
 			name = Release;
 		};
@@ -309,6 +334,7 @@
 				093E369A1F5E4C2F0012C05F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
