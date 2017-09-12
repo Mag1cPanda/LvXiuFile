@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="N2z-yR-lpw">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -20,31 +20,28 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XKc-do-oMZ">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </webView>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="XKc-do-oMZ" secondAttribute="trailing" id="1ff-Hk-dhH"/>
+                            <constraint firstItem="XKc-do-oMZ" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="PFE-9a-l0x"/>
+                            <constraint firstItem="XKc-do-oMZ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Smv-Xf-Wsf"/>
+                            <constraint firstAttribute="bottom" secondItem="XKc-do-oMZ" secondAttribute="bottom" id="ngU-a3-qDe"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Uks-BS-gsv"/>
+                    <connections>
+                        <outlet property="webView" destination="XKc-do-oMZ" id="zTi-qs-pkK"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1056.8" y="110.19490254872565"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="IP0-0z-ile">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="N2z-yR-lpw" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="i7G-ry-hFt">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="cqS-H0-Y4E"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ckd-Br-Jzi" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="116" y="764.16791604197908"/>
         </scene>
     </scenes>
 </document>
