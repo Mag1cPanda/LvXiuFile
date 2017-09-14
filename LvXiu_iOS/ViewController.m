@@ -9,10 +9,16 @@
 #import "ViewController.h"
 #import <JavaScriptCore/JavaScriptCore.h>
 #import "LvXiu.h"
+#import "LRWebView.h"
+#import "NJKWebViewProgressView.h"
+#import "NJKWebViewProgress.h"
 
-@interface ViewController ()<UIWebViewDelegate>
-
-@property (weak, nonatomic) IBOutlet UIWebView *webView;
+@interface ViewController ()<UIWebViewDelegate,NJKWebViewProgressDelegate>
+{
+    NJKWebViewProgressView *_progressView;
+    NJKWebViewProgress *_progressProxy;
+}
+@property (weak, nonatomic) IBOutlet LRWebView *webView;
 
 
 @end
@@ -24,60 +30,86 @@
     // Do any additional setup after loading the view, typically from a nib.
     
     self.title = @"LvXiu";
+    self.automaticallyAdjustsScrollViewInsets = false;
     
     //去除导航栏底部黑线
-//    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-//    [self.navigationController.navigationBar setShadowImage:[UIImage new]];
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setShadowImage:[UIImage new]];
     
+    // 仿微信进度条
+    _progressProxy = [[NJKWebViewProgress alloc] init];
+    _webView.delegate = _progressProxy;
+    _progressProxy.webViewProxyDelegate = self;
+    _progressProxy.progressDelegate = self;
     
-//    [self makefourbtn];
+    CGFloat progressBarHeight = 2.f;
+    CGRect navigationBarBounds = self.navigationController.navigationBar.bounds;
+    CGRect barFrame = CGRectMake(0, navigationBarBounds.size.height - progressBarHeight, navigationBarBounds.size.width, progressBarHeight);
+    _progressView = [[NJKWebViewProgressView alloc] initWithFrame:barFrame];
+    _progressView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
+//    [self.navigationController.navigationBar addSubview:_progressView];
+
     
-    _webView.delegate = self;
     [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://webtest.lvxiu.96007.cc/test.html"]]];
-    
     
 }
 
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.navigationController.navigationBar addSubview:_progressView];
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    // Remove progress view
+    // because UINavigationBar is shared with other ViewControllers
+    [_progressView removeFromSuperview];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-- (void)makefourbtn{
-    NSArray *titltArr = @[@"重载",@"后退",@"前进",@"跳转"];
-    UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, ScreenHeight-50, ScreenWidth, 50)];
-    backView.backgroundColor = [UIColor whiteColor];
-    backView.alpha = 0.5;
-    backView.layer.borderColor = [UIColor lightGrayColor].CGColor;
-    backView.layer.borderWidth = 0.5;
-    [self.view addSubview:backView];
-    
-    for (int i= 0 ; i<4; i ++) {
-        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-        button.frame = CGRectMake(10+i*((ScreenWidth-50)/4+10), 5, (ScreenWidth-50)/4, 40);
-        [button setTitle:titltArr[i] forState:UIControlStateNormal];
-        button.layer.borderWidth = 0.5;
-        [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        button.tag = i;
-//        [button addTarget:self action:@selector(btnClicked:) forControlEvents:UIControlEventTouchUpInside];
-        [backView addSubview:button];
-    }
-}
 
-
-- (void)webViewDidFinishLoad:(UIWebView *)webView
-{
-    JSContext *ctx = [webView valueForKeyPath:@"documentView.webView.mainFrame.javaScriptContext"];
-    ctx[@"lx"] = [[LvXiu alloc] init];
-}
+#pragma mark - UIWebViewDelegate
 
 -(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
-    
+    NSLog(@"------:%@", [request valueForHTTPHeaderField:@"User-Agent"]);
     
     return YES;
 }
+
+- (void)webViewDidStartLoad:(UIWebView *)webView{
+    
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView{
+    
+    JSContext *ctx = [webView valueForKeyPath:@"documentView.webView.mainFrame.javaScriptContext"];
+    ctx[@"lx"] = [[LvXiu alloc] init];
+    
+
+}
+
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
+{
+    NSLog(@"error ~ %@",error.description);
+}
+
+
+#pragma mark - NJKWebViewProgressDelegate
+-(void)webViewProgress:(NJKWebViewProgress *)webViewProgress updateProgress:(float)progress
+{
+    [_progressView setProgress:progress animated:YES];
+    self.title = [_webView stringByEvaluatingJavaScriptFromString:@"document.title"];
+}
+
 
 
 @end

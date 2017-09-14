@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="sML-KB-9uz">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -12,7 +12,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -21,25 +21,43 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XKc-do-oMZ">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XKc-do-oMZ" customClass="LRWebView">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </webView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="XKc-do-oMZ" secondAttribute="trailing" id="1ff-Hk-dhH"/>
-                            <constraint firstItem="XKc-do-oMZ" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="PFE-9a-l0x"/>
-                            <constraint firstItem="XKc-do-oMZ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Smv-Xf-Wsf"/>
-                            <constraint firstAttribute="bottom" secondItem="XKc-do-oMZ" secondAttribute="bottom" id="ngU-a3-qDe"/>
+                            <constraint firstItem="XKc-do-oMZ" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="COO-66-XVW"/>
+                            <constraint firstItem="XKc-do-oMZ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="YJh-Hl-E4M"/>
+                            <constraint firstAttribute="trailing" secondItem="XKc-do-oMZ" secondAttribute="trailing" id="aMo-4O-703"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="XKc-do-oMZ" secondAttribute="bottom" id="oxG-6t-JL8"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Uks-BS-gsv"/>
                     <connections>
-                        <outlet property="webView" destination="XKc-do-oMZ" id="zTi-qs-pkK"/>
+                        <outlet property="webView" destination="XKc-do-oMZ" id="HFk-FD-Z7E"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1996" y="110.19490254872565"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="7XC-cB-6kF">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="sML-KB-9uz" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="hCv-fl-RUZ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="lo0-Hf-qqL"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9Nd-l1-TZj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1056.8" y="110.19490254872565"/>
         </scene>

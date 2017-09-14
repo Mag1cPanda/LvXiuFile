@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		093A82231F691D7F003FFFDB /* LRWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 093A82221F691D7F003FFFDB /* LRWebView.m */; };
+		093A82291F692168003FFFDB /* NSObject+MethodSwizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = 093A82281F692168003FFFDB /* NSObject+MethodSwizzling.m */; };
+		093A822C1F692182003FFFDB /* NSMutableURLRequest+LRMutableURLRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 093A822B1F692182003FFFDB /* NSMutableURLRequest+LRMutableURLRequest.m */; };
+		093A82611F693753003FFFDB /* NJKWebViewProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = 093A825E1F693753003FFFDB /* NJKWebViewProgress.m */; };
+		093A82621F693753003FFFDB /* NJKWebViewProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 093A82601F693753003FFFDB /* NJKWebViewProgressView.m */; };
 		093E36861F5E4C2F0012C05F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 093E36851F5E4C2F0012C05F /* main.m */; };
 		093E36891F5E4C2F0012C05F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 093E36881F5E4C2F0012C05F /* AppDelegate.m */; };
 		093E368C1F5E4C2F0012C05F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 093E368B1F5E4C2F0012C05F /* ViewController.m */; };
@@ -18,6 +23,7 @@
 		0960952D1F676DBA0023696E /* ImageItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0960952B1F676DBA0023696E /* ImageItem.m */; };
 		096095311F676DD00023696E /* LvXiu.m in Sources */ = {isa = PBXBuildFile; fileRef = 096095301F676DD00023696E /* LvXiu.m */; };
 		096095341F6772420023696E /* Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 096095331F6772420023696E /* Util.m */; };
+		0960953C1F67B3950023696E /* JSBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 0960953B1F67B3950023696E /* JSBridge.m */; };
 		096278481F5FA59300192340 /* NSBundle+TZImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 0962782C1F5FA59300192340 /* NSBundle+TZImagePicker.m */; };
 		096278491F5FA59300192340 /* TZAssetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0962782E1F5FA59300192340 /* TZAssetCell.m */; };
 		0962784A1F5FA59300192340 /* TZAssetModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 096278301F5FA59300192340 /* TZAssetModel.m */; };
@@ -36,6 +42,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		093A82211F691D7F003FFFDB /* LRWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LRWebView.h; sourceTree = "<group>"; };
+		093A82221F691D7F003FFFDB /* LRWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LRWebView.m; sourceTree = "<group>"; };
+		093A82271F692168003FFFDB /* NSObject+MethodSwizzling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MethodSwizzling.h"; sourceTree = "<group>"; };
+		093A82281F692168003FFFDB /* NSObject+MethodSwizzling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MethodSwizzling.m"; sourceTree = "<group>"; };
+		093A822A1F692182003FFFDB /* NSMutableURLRequest+LRMutableURLRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableURLRequest+LRMutableURLRequest.h"; sourceTree = "<group>"; };
+		093A822B1F692182003FFFDB /* NSMutableURLRequest+LRMutableURLRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableURLRequest+LRMutableURLRequest.m"; sourceTree = "<group>"; };
+		093A825D1F693753003FFFDB /* NJKWebViewProgress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NJKWebViewProgress.h; sourceTree = "<group>"; };
+		093A825E1F693753003FFFDB /* NJKWebViewProgress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NJKWebViewProgress.m; sourceTree = "<group>"; };
+		093A825F1F693753003FFFDB /* NJKWebViewProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NJKWebViewProgressView.h; sourceTree = "<group>"; };
+		093A82601F693753003FFFDB /* NJKWebViewProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NJKWebViewProgressView.m; sourceTree = "<group>"; };
 		093E36811F5E4C2F0012C05F /* LvXiu_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LvXiu_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		093E36851F5E4C2F0012C05F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		093E36871F5E4C2F0012C05F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -56,6 +72,8 @@
 		096095301F676DD00023696E /* LvXiu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LvXiu.m; sourceTree = "<group>"; };
 		096095321F6772420023696E /* Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Util.h; sourceTree = "<group>"; };
 		096095331F6772420023696E /* Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Util.m; sourceTree = "<group>"; };
+		0960953A1F67B3950023696E /* JSBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSBridge.h; sourceTree = "<group>"; };
+		0960953B1F67B3950023696E /* JSBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSBridge.m; sourceTree = "<group>"; };
 		0962782B1F5FA59300192340 /* NSBundle+TZImagePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+TZImagePicker.h"; sourceTree = "<group>"; };
 		0962782C1F5FA59300192340 /* NSBundle+TZImagePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+TZImagePicker.m"; sourceTree = "<group>"; };
 		0962782D1F5FA59300192340 /* TZAssetCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TZAssetCell.h; sourceTree = "<group>"; };
@@ -99,6 +117,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		093A825C1F693753003FFFDB /* NJKWebViewProgress */ = {
+			isa = PBXGroup;
+			children = (
+				093A825D1F693753003FFFDB /* NJKWebViewProgress.h */,
+				093A825E1F693753003FFFDB /* NJKWebViewProgress.m */,
+				093A825F1F693753003FFFDB /* NJKWebViewProgressView.h */,
+				093A82601F693753003FFFDB /* NJKWebViewProgressView.m */,
+			);
+			path = NJKWebViewProgress;
+			sourceTree = "<group>";
+		};
 		093E36781F5E4C2F0012C05F = {
 			isa = PBXGroup;
 			children = (
@@ -170,6 +199,8 @@
 			children = (
 				0960952F1F676DD00023696E /* LvXiu.h */,
 				096095301F676DD00023696E /* LvXiu.m */,
+				0960953A1F67B3950023696E /* JSBridge.h */,
+				0960953B1F67B3950023696E /* JSBridge.m */,
 			);
 			path = JSExport;
 			sourceTree = "<group>";
@@ -177,7 +208,14 @@
 		096278291F5FA58600192340 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				093A825C1F693753003FFFDB /* NJKWebViewProgress */,
 				0962782A1F5FA59300192340 /* TZImagePickerController */,
+				093A82211F691D7F003FFFDB /* LRWebView.h */,
+				093A82221F691D7F003FFFDB /* LRWebView.m */,
+				093A82271F692168003FFFDB /* NSObject+MethodSwizzling.h */,
+				093A82281F692168003FFFDB /* NSObject+MethodSwizzling.m */,
+				093A822A1F692182003FFFDB /* NSMutableURLRequest+LRMutableURLRequest.h */,
+				093A822B1F692182003FFFDB /* NSMutableURLRequest+LRMutableURLRequest.m */,
 			);
 			path = Vendor;
 			sourceTree = "<group>";
@@ -300,17 +338,23 @@
 				0960952C1F676DBA0023696E /* ChooseImageOut.m in Sources */,
 				093E368C1F5E4C2F0012C05F /* ViewController.m in Sources */,
 				0962784D1F5FA59300192340 /* TZImageManager.m in Sources */,
+				0960953C1F67B3950023696E /* JSBridge.m in Sources */,
+				093A82611F693753003FFFDB /* NJKWebViewProgress.m in Sources */,
 				0960952D1F676DBA0023696E /* ImageItem.m in Sources */,
 				093E36891F5E4C2F0012C05F /* AppDelegate.m in Sources */,
 				096278561F5FA59300192340 /* UIView+Layout.m in Sources */,
+				093A82231F691D7F003FFFDB /* LRWebView.m in Sources */,
+				093A822C1F692182003FFFDB /* NSMutableURLRequest+LRMutableURLRequest.m in Sources */,
 				096278511F5FA59300192340 /* TZPhotoPickerController.m in Sources */,
 				0962784B1F5FA59300192340 /* TZGifPhotoPreviewController.m in Sources */,
 				096278551F5FA59300192340 /* TZVideoPlayerController.m in Sources */,
 				093E36861F5E4C2F0012C05F /* main.m in Sources */,
 				096278501F5FA59300192340 /* TZLocationManager.m in Sources */,
 				0962784C1F5FA59300192340 /* TZImageCropManager.m in Sources */,
+				093A82291F692168003FFFDB /* NSObject+MethodSwizzling.m in Sources */,
 				0962784F1F5FA59300192340 /* TZImagePickerController.m in Sources */,
 				096095311F676DD00023696E /* LvXiu.m in Sources */,
+				093A82621F693753003FFFDB /* NJKWebViewProgressView.m in Sources */,
 				096278521F5FA59300192340 /* TZPhotoPreviewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

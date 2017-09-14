@@ -15,33 +15,6 @@
 
 @implementation LvXiu
 
-+ (BOOL)isSourceTypeAvailable:(NSString *)sourceType
-{
-    if (![sourceType isEqualToString:@"PhotoLibrary"] && ![sourceType isEqualToString:@"SavedPhotoAlbum"] && ![sourceType isEqualToString:@"Camera"]) {
-        return NO;
-    }
-    
-    UIImagePickerControllerSourceType sourceTypeClass = [self getSourceTypeClass:sourceType];
-    if (![UIImagePickerController isSourceTypeAvailable:sourceTypeClass]) {
-        return NO;
-    }
-    return YES;
-}
-
-+ (UIImagePickerControllerSourceType)getSourceTypeClass:(NSString *)sourceType
-{
-    if( [sourceType isEqualToString:@"PhotoLibrary"] ) {
-        return UIImagePickerControllerSourceTypePhotoLibrary;
-    } else if( [sourceType isEqualToString:@"SavedPhotosAlbum"] ) {
-        return UIImagePickerControllerSourceTypeSavedPhotosAlbum;
-    } else if( [sourceType isEqualToString:@"Camera"] ) {
-        return UIImagePickerControllerSourceTypeCamera;
-    }
-    return UIImagePickerControllerSourceTypePhotoLibrary;
-}
-
-
-
 -(void)chooseImage:(NSDictionary *)options {
 
     
@@ -117,11 +90,11 @@
     
     NSDictionary *dic = @{@"images":@[@{@"fileID":imgStr, @"fileType":@"png"}]};
     
-    NSString *json = [Util convertToJsonData:dic];
+//    NSString *json = [Util convertToJsonData:dic];
     
-    NSArray *arr = [NSArray arrayWithObjects:@"success",json,nil];
+//    NSArray *arr = [NSArray arrayWithObjects:@"success",json,nil];
     
-    [callback callWithArguments:arr];
+//    [callback callWithArguments:arr];
     
 
     if (iOS8Later) {
@@ -136,6 +109,32 @@
 /// 用户点击了取消
 - (void)tz_imagePickerControllerDidCancel:(TZImagePickerController *)picker {
      NSLog(@"cancel");
+}
+
+
+
+
+#pragma mark - 处理接口地址
+- (void)parseApiUrl:(NSDictionary *)result
+{
+    // 1.创建一个网络路径
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://test.lvxiu.96007.cc/Member/OpenLogin/qqCallback"]];
+    // 2.创建一个网络请求
+    NSURLRequest *request =[NSURLRequest requestWithURL:url];
+    // 3.获得会话对象
+    NSURLSession *session = [NSURLSession sharedSession];
+    // 4.根据会话对象，创建一个Task任务：
+    NSURLSessionDataTask *sessionDataTask = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        NSLog(@"从服务器获取到数据");
+        /*
+         对从服务器获取到的数据data进行相应的处理：
+         */
+        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:(NSJSONReadingMutableLeaves) error:nil];
+        
+        NSLog(@"%@",dict);
+    }];
+    // 5.最后一步，执行任务（resume也是继续执行）:
+    [sessionDataTask resume];
 }
 
 @end

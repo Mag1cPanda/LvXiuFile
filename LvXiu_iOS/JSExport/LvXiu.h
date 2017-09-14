@@ -18,6 +18,9 @@
 JSExportAs(chooseImage,
            - (void)chooseImage:(NSDictionary *)options);
 
+JSExportAs(parseApiUrl,
+           - (void)parseApiUrl:(NSDictionary *)result);
+
 @end
 
 @interface LvXiu : NSObject
