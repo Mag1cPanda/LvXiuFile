@@ -10,28 +10,50 @@
 #import <JavaScriptCore/JavaScriptCore.h>
 #import <UIKit/UIKit.h>
 #import "TZImagePickerController.h"
+#import <CoreLocation/CoreLocation.h>
 
 @class LvXiu;
 
 @protocol LvXiuExports <JSExport>
 
 JSExportAs(chooseImage,
-           - (void)chooseImage:(NSDictionary *)options);
+           - (void)chooseImage:(JSValue *)options);
+
+JSExportAs(getImage,
+           - (NSString *)getImage:(NSString *)fileID);
+
+JSExportAs(getImageExif,
+           - (NSString *)getImageExif:(NSString *)fileID);
+
+JSExportAs(getDeviceID,
+           - (NSString *)getDeviceID:(NSString *)deviceID);
+
+JSExportAs(hapticFeedback,
+           - (void)hapticFeedback:(JSValue *)options);
+
+JSExportAs(getLocation,
+           - (void)getLocation:(JSValue *)options);
 
 JSExportAs(parseApiUrl,
-           - (void)parseApiUrl:(NSDictionary *)result);
+           - (NSString *)parseApiUrl:(JSValue *)options);
 
 @end
 
 @interface LvXiu : NSObject
 <LvXiuExports,
 UINavigationControllerDelegate,
-UIImagePickerControllerDelegate,
-TZImagePickerControllerDelegate>
+TZImagePickerControllerDelegate,
+CLLocationManagerDelegate>
 {
     JSValue *callback;
+    NSMutableArray *images;
+    id webData;
 }
 
 @property (nonatomic, strong) TZImagePickerController *picker;
+
+@property (nonatomic, strong) CLLocationManager *locationM;
+
+@property (nonatomic, copy) NSString *URL;
 
 @end

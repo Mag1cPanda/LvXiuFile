@@ -18,7 +18,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    
+    //利用Category+Runtime实现自定义浏览器UA
     [NSMutableURLRequest setupUserAgentOverwrite];
     
     self.window.backgroundColor = [UIColor whiteColor];

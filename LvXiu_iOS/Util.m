@@ -23,10 +23,13 @@
 
 //1. 字典转Json字符串
 +(NSString *)convertToJsonData:(NSDictionary *)dict
-
 {
     
     NSError *error;
+    
+    if (![dict isKindOfClass:[NSDictionary class]]) {
+        return @"";
+    }
     
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:&error];
     
