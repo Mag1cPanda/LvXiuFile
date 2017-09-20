@@ -13,6 +13,9 @@
 #import "UIImage+HNCompress.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import "AFNetworking.h"
+#import "Masonry.h"
+#import "PopoverView.h"
+#import "LvXiuViewController.h"
 
 @implementation LvXiu
 
@@ -54,8 +57,6 @@
 }
 
 
-/// User click cancel button
-/// 用户点击了取消
 - (void)tz_imagePickerControllerDidCancel:(TZImagePickerController *)picker {
     NSLog(@"cancel");
 }
@@ -123,6 +124,124 @@
     [self locate];
     
 }
+
+-(void)setActionBar:(JSValue *)options
+{
+    NSString *title = [[options valueForProperty:@"rightButtonTitle"] toString];
+    
+    NSString *backgroundColor = [[options valueForProperty:@"backgroundColor"] toString];
+    
+//    BOOL isShowRightButton = [[options valueForProperty:@"showRightButton"] toBool];
+    
+    BOOL isShowReturnButton = [[options valueForProperty:@"showReturnButton"] toBool];
+    
+    NSString *mode = [[options valueForProperty:@"mode"] toString];
+    
+    JSValue *menus = [options valueForProperty:@"menus"];
+    
+    NSLog(@"menus ~ %@",menus);
+    
+    //获取undefinedValue
+    JSContext *ctx = [_vc.webView valueForKeyPath:@"documentView.webView.mainFrame.javaScriptContext"];
+    
+    JSValue *undefinedValue = [JSValue valueWithUndefinedInContext:ctx];
+    
+    
+    if (backgroundColor) {
+        _vc.navigationController.navigationBar.backgroundColor = [UIColor colorWithHexString:backgroundColor];
+        JSValue *tmpValue = [options valueForProperty:@"rightButtonClick"];
+        
+        callback = tmpValue;
+    }
+    
+    
+//    if (!isShowRightButton) {
+//        _vc.rightBtn.hidden = true;
+//    }
+    
+    if (!isShowReturnButton) {
+        _vc.backBtn.hidden = true;
+    }
+    
+    if (title) {
+//        [_vc.rightBtn setTitle:title forState:0];
+        [_vc.rightBtn addTarget:self action:@selector(commitBtnClicked) forControlEvents:1<<6];
+    }
+    
+    if ([mode isEqualToString:@"fullscreen"]) {
+        _vc.navigationController.navigationBar.hidden = true;
+        
+        _vc.webView.frame = [UIScreen mainScreen].bounds;
+    }
+    
+    else {
+        _vc.navigationController.navigationBar.hidden = false;
+    }
+    
+    
+    if (menus) {
+        JSValue *test1 = [menus valueForProperty:@"test1"];
+//        NSString *color1 = [[test1 valueForProperty:@"color"] toString];
+        
+        NSString *title1 = [[test1 valueForProperty:@"title"] toString];
+        NSString *icon1 = [[test1 valueForProperty:@"icon"] toString];
+        JSValue *callback1 = [test1 valueForProperty:@"callback"];
+        
+        UIImage *image1 = [UIImage getImageFromBase64:icon1];
+        image1 = [UIImage compressImage:image1 newWidth:20];
+        
+        PopoverAction *action1 = [PopoverAction actionWithImage:image1 title:title1 handler:^(PopoverAction *action) {
+            
+            [callback1 callWithArguments:nil];
+            
+        }];
+        
+        
+        JSValue *test2 = [menus valueForProperty:@"test2"];
+        NSString *title2 = [[test2 valueForProperty:@"title"] toString];
+        NSString *icon2 = [[test2 valueForProperty:@"icon"] toString];
+        JSValue *callback2 = [test2 valueForProperty:@"callback"];
+        
+        UIImage *image2 = [UIImage getImageFromBase64:icon2];
+        image2 = [UIImage compressImage:image2 newWidth:20];
+        
+        PopoverAction *action2 = [PopoverAction actionWithImage:image2 title:title2 handler:^(PopoverAction *action) {
+            
+            [callback2 callWithArguments:nil];
+            
+        }];
+        
+        JSValue *test3 = [menus valueForProperty:@"test3"];
+        NSString *title3 = [[test3 valueForProperty:@"title"] toString];
+        NSString *icon3 = [[test3 valueForProperty:@"icon"] toString];
+        JSValue *callback3 = [test3 valueForProperty:@"callback"];
+        
+        UIImage *image3 = [UIImage getImageFromBase64:icon3];
+        image3 = [UIImage compressImage:image3 newWidth:20];
+        
+        PopoverAction *action3 = [PopoverAction actionWithImage:image3 title:title3 handler:^(PopoverAction *action) {
+            
+            [callback3 callWithArguments:nil];
+            
+        }];
+        
+        actionsArr = @[action1,action2,action3];
+        
+        
+        if (![menus isEqualToObject:undefinedValue]) {
+            [_vc.rightBtn addTarget:self action:@selector(menusBtnClicked) forControlEvents:1<<6];
+        }
+        
+    }
+    
+}
+
+-(void)menusBtnClicked
+{
+    PopoverView *popoverView = [PopoverView popoverView];
+    [popoverView showToView:_vc.rightBtn withActions:actionsArr];
+}
+
 
 
 #pragma mark - CLLocationManagerDelegate
@@ -220,6 +339,33 @@
              webData = error.description;
          }];
 }
+
+-(void)commitBtnClicked
+{
+    [callback callWithArguments:nil];
+}
+
+
+- (UIViewController *)topViewController {
+    UIViewController *resultVC;
+    resultVC = [self _topViewController:[[UIApplication sharedApplication].keyWindow rootViewController]];
+    while (resultVC.presentedViewController) {
+        resultVC = [self _topViewController:resultVC.presentedViewController];
+    }
+    return resultVC;
+}
+
+- (UIViewController *)_topViewController:(UIViewController *)vc {
+    if ([vc isKindOfClass:[UINavigationController class]]) {
+        return [self _topViewController:[(UINavigationController *)vc topViewController]];
+    } else if ([vc isKindOfClass:[UITabBarController class]]) {
+        return [self _topViewController:[(UITabBarController *)vc selectedViewController]];
+    } else {
+        return vc;
+    }
+    return nil;
+}
+
 
 
 

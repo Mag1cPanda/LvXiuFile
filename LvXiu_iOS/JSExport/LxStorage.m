@@ -7,6 +7,7 @@
 //
 
 #import "LxStorage.h"
+#import "Util.h"
 
 @implementation LxStorage
 
@@ -14,23 +15,40 @@
 {
     self = [super init];
     if (self) {
-        _groups = [NSMutableArray array];
+        _data = [NSMutableDictionary dictionary];
     }
     return self;
 }
 
--(BOOL)read:(JSValue *)options
+-(NSString *)read:(JSValue *)options
 {
     NSLog(@"read");
     
-    return true;
+    if ([_data isEqualToDictionary:@{}]) {
+        return @"";
+    }
+    
+    else {
+        return [Util convertToJsonData:_data];
+    }
+    
 }
 
 -(BOOL)write:(JSValue *)options
 {
     NSLog(@"write");
     
+    NSString *group = [self.webView stringByEvaluatingJavaScriptFromString:@"$('#storageGroup').val();"];
+    
     NSString *key = [self.webView stringByEvaluatingJavaScriptFromString:@"$('#storageKey').val();"];
+    
+    NSString *value = [self.webView stringByEvaluatingJavaScriptFromString:@"$('#storageValue').val();"];
+    
+    [_data setObject:group forKey:@"group"];
+    
+    [_data setObject:key forKey:@"key"];
+    
+    [_data setObject:value forKey:@"value"];
     
     
     return true;
@@ -40,7 +58,11 @@
 {
     NSLog(@"delete");
     
-    NSString *key = [self.webView stringByEvaluatingJavaScriptFromString:@"$('#storageKey').val();"];
+    [_data removeObjectForKey:@"group"];
+    
+    [_data removeObjectForKey:@"key"];
+    
+    [_data removeObjectForKey:@"value"];
     
     return true;
 }
@@ -48,10 +70,17 @@
 -(NSArray *)getKeys:(JSValue *)options
 {
     NSLog(@"getKeys");
+
+    NSString *key = [_data objectForKey:@"key"];
     
-    NSString *group = [self.webView stringByEvaluatingJavaScriptFromString:@"$('#storageGroup').val();"];
+    if (key) {
+        return @[key];
+    }
     
-    return @[@"1",@"2"];
+    else {
+        return @[];
+    }
+    
 }
 
 

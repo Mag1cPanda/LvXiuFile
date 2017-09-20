@@ -14,4 +14,8 @@
 + (UIImage *)compressImage:(UIImage *)image newWidth:(CGFloat)newImageWidth;
 
 + (NSString*)getImageBase64:(UIImage *) image;
+
+
++(UIImage *)getImageFromBase64:(NSString *)string;
+
 @end

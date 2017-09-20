@@ -81,4 +81,16 @@
     return encodedString;
 }
 
+
++(UIImage *)getImageFromBase64:(NSString *)string
+{
+    NSData *decodedImageData = [[NSData alloc]
+                                
+                                initWithBase64EncodedString:string options:NSDataBase64DecodingIgnoreUnknownCharacters];
+    
+    UIImage *decodedImage = [UIImage imageWithData:decodedImageData];
+    
+    return decodedImage;
+}
+
 @end

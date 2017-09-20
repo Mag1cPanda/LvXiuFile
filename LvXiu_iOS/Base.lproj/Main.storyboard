@@ -12,7 +12,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="BYZ-38-t0r" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -21,10 +21,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XKc-do-oMZ" customClass="LRWebView">
-                                <rect key="frame" x="0.0" y="64" width="320" height="474"/>
-                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </webView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VcT-rI-ggb">
                                 <rect key="frame" x="95" y="538" width="55" height="30"/>
                                 <constraints>
@@ -70,26 +66,19 @@
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="weQ-lB-bGy" secondAttribute="bottom" id="03N-kH-Gni"/>
                             <constraint firstAttribute="bottom" secondItem="7Ft-8k-5Yr" secondAttribute="bottom" id="7mO-Ee-2Gq"/>
-                            <constraint firstItem="XKc-do-oMZ" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="COO-66-XVW"/>
                             <constraint firstItem="weQ-lB-bGy" firstAttribute="width" secondItem="7Ft-8k-5Yr" secondAttribute="width" id="HBa-5A-cru"/>
                             <constraint firstAttribute="bottom" secondItem="VcT-rI-ggb" secondAttribute="bottom" id="MAa-at-d8f"/>
                             <constraint firstItem="IwI-F4-aQR" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="O8h-OW-CsS"/>
                             <constraint firstItem="VcT-rI-ggb" firstAttribute="leading" secondItem="IwI-F4-aQR" secondAttribute="trailing" constant="20" id="Vv5-bc-dlG"/>
-                            <constraint firstItem="XKc-do-oMZ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="YJh-Hl-E4M"/>
-                            <constraint firstAttribute="trailing" secondItem="XKc-do-oMZ" secondAttribute="trailing" id="aMo-4O-703"/>
                             <constraint firstItem="7Ft-8k-5Yr" firstAttribute="leading" secondItem="weQ-lB-bGy" secondAttribute="trailing" constant="20" id="bo3-r9-wV1"/>
                             <constraint firstItem="VcT-rI-ggb" firstAttribute="width" secondItem="weQ-lB-bGy" secondAttribute="width" id="eIO-Ss-rEi"/>
                             <constraint firstItem="weQ-lB-bGy" firstAttribute="leading" secondItem="VcT-rI-ggb" secondAttribute="trailing" constant="20" id="gVh-D8-9Ec"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="XKc-do-oMZ" secondAttribute="bottom" constant="30" id="oxG-6t-JL8"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="IwI-F4-aQR" secondAttribute="bottom" id="sxR-8E-RRT"/>
                             <constraint firstAttribute="trailing" secondItem="7Ft-8k-5Yr" secondAttribute="trailing" constant="20" id="uMN-wA-ZWp"/>
                             <constraint firstItem="IwI-F4-aQR" firstAttribute="width" secondItem="VcT-rI-ggb" secondAttribute="width" id="wOb-z0-dkc"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Uks-BS-gsv"/>
-                    <connections>
-                        <outlet property="webView" destination="XKc-do-oMZ" id="HFk-FD-Z7E"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

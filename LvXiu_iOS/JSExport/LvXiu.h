@@ -11,6 +11,7 @@
 #import <UIKit/UIKit.h>
 #import "TZImagePickerController.h"
 #import <CoreLocation/CoreLocation.h>
+#import "BaseViewController.h"
 
 @class LvXiu;
 
@@ -37,6 +38,9 @@ JSExportAs(getLocation,
 JSExportAs(parseApiUrl,
            - (NSString *)parseApiUrl:(JSValue *)options);
 
+JSExportAs(setActionBar,
+           - (void)setActionBar:(JSValue *)options);
+
 @end
 
 @interface LvXiu : NSObject
@@ -48,6 +52,8 @@ CLLocationManagerDelegate>
     JSValue *callback;
     NSMutableArray *images;
     id webData;
+    
+    NSArray *actionsArr;
 }
 
 @property (nonatomic, strong) TZImagePickerController *picker;
@@ -55,5 +61,7 @@ CLLocationManagerDelegate>
 @property (nonatomic, strong) CLLocationManager *locationM;
 
 @property (nonatomic, copy) NSString *URL;
+
+@property (nonatomic, strong) BaseViewController *vc;
 
 @end

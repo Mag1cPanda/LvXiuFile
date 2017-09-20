@@ -15,7 +15,7 @@
 @protocol LxStorageExports <JSExport>
 
 JSExportAs(read,
-           - (BOOL)read:(JSValue *)options);
+           - (NSString *)read:(JSValue *)options);
 
 JSExportAs(write,
            - (BOOL)write:(JSValue *)options);
@@ -33,7 +33,7 @@ JSExportAs(getKeys,
 
 @property (nonatomic, strong) UIWebView *webView;
 
-@property (nonatomic, copy) NSMutableArray *groups;
+@property (nonatomic, copy) NSMutableDictionary *data;
 
 @property (nonatomic, copy) NSString *key;
 @property (nonatomic, copy) NSString *value;

@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 #import "NSMutableURLRequest+LRMutableURLRequest.h"
+#import "LRNavigationController.h"
+#import "LvXiuViewController.h"
 
 @interface AppDelegate ()
 
@@ -18,10 +20,17 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
     //利用Category+Runtime实现自定义浏览器UA
     [NSMutableURLRequest setupUserAgentOverwrite];
     
+    
+    
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
+    LRNavigationController *navi = [[LRNavigationController alloc] initWithRootViewController:[LvXiuViewController new]]; ;
+    self.window.rootViewController = navi;
+    [self.window makeKeyAndVisible];
     
     return YES;
 }
