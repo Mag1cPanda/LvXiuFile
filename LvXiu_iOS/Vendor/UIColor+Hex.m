@@ -1,9 +1,9 @@
 //
 //  UIColor+Hex.m
-//  CZT_IOS_Longrise
+//  LvXiu_iOS
 //
-//  Created by Mag1cPanda on 16/3/23.
-//  Copyright © 2016年 程三. All rights reserved.
+//  Created by panshen on 2017/9/21.
+//  Copyright © 2017年 panshen. All rights reserved.
 //
 
 #import "UIColor+Hex.h"

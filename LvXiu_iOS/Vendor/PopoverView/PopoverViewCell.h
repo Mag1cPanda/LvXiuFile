@@ -17,11 +17,10 @@ UIKIT_EXTERN float const PopoverViewCellTitleLeftEdge; ///< 标题左边边距
 
 @interface PopoverViewCell : UITableViewCell
 
-@property (nonatomic, assign) PopoverViewStyle style;
+@property (nonatomic, strong) UIButton *button;
+@property (nonatomic, weak) UIView *bottomLine;
 
-/*! @brief 标题颜色
- */
-//+ (UIFont *)titleColor;
+@property (nonatomic, assign) PopoverViewStyle style;
 
 /*! @brief 标题字体
  */

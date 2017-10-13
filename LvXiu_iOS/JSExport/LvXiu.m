@@ -16,6 +16,7 @@
 #import "Masonry.h"
 #import "PopoverView.h"
 #import "LvXiuViewController.h"
+#import <UMSocialCore/UMSocialCore.h>
 
 @implementation LvXiu
 
@@ -25,6 +26,7 @@
     self = [super init];
     if (self) {
         images = [NSMutableArray array];
+        locationTimes = 0;
         [self loadData];
     }
     return self;
@@ -95,18 +97,17 @@
 
 -(NSString *)parseApiUrl:(JSValue *)options
 {
-//    NSString *json = [Util convertToJsonData:webData];
-//    
-//    if (json.length > 0) {
-//        return json;
-//    }
-//    
-//    else {
-//        return webData;
-//    }
-    
-    return _URL;
-    
+    NSLog(@"URLSuffix ~ %@",options);
+
+    NSString *suffix = [options toString];
+    if (suffix.length > 0) {
+        return [NSString stringWithFormat:@"http://test.lvxiu.96007.cc/%@",suffix];
+    }
+
+    else {
+        return @"http://test.lvxiu.96007.cc/";
+    }
+
 }
 
 
@@ -118,8 +119,10 @@
 
 -(void)getLocation:(JSValue *)options
 {
-    callback = [options valueForProperty:@"success"];
-    NSLog(@"success ~ %@",callback);
+    gpsCallBack = [options valueForProperty:@"success"];
+    NSLog(@"success ~ %@",gpsCallBack);
+    
+    locationTimes = 0;
     
     [self locate];
     
@@ -127,17 +130,26 @@
 
 -(void)setActionBar:(JSValue *)options
 {
-    NSString *title = [[options valueForProperty:@"rightButtonTitle"] toString];
     
-    NSString *backgroundColor = [[options valueForProperty:@"backgroundColor"] toString];
+    JSValue *rightButtonTitle = [options valueForProperty:@"rightButtonTitle"];
+    
+    JSValue *title = [options valueForProperty:@"title"];
+    
+    JSValue *backgroundColor = [options valueForProperty:@"backgroundColor"];
     
 //    BOOL isShowRightButton = [[options valueForProperty:@"showRightButton"] toBool];
     
-    BOOL isShowReturnButton = [[options valueForProperty:@"showReturnButton"] toBool];
+    JSValue *isShowReturnButton = [options valueForProperty:@"showReturnButton"];
     
-    NSString *mode = [[options valueForProperty:@"mode"] toString];
+    JSValue *mode = [options valueForProperty:@"mode"];
     
     JSValue *menus = [options valueForProperty:@"menus"];
+    
+    JSValue *titleClick = [options valueForProperty:@"titleClick"];
+    
+    JSValue *rightImage = [options valueForProperty:@"rightImage"];
+    
+    JSValue *icon = [options valueForProperty:@"icon"];
     
     NSLog(@"menus ~ %@",menus);
     
@@ -147,11 +159,37 @@
     JSValue *undefinedValue = [JSValue valueWithUndefinedInContext:ctx];
     
     
-    if (backgroundColor) {
-        _vc.navigationController.navigationBar.backgroundColor = [UIColor colorWithHexString:backgroundColor];
+    if (![backgroundColor isEqualToObject:undefinedValue]) {
+        _vc.navigationController.navigationBar.backgroundColor = [UIColor colorWithHexString:[backgroundColor toString]];
         JSValue *tmpValue = [options valueForProperty:@"rightButtonClick"];
         
         callback = tmpValue;
+    }
+    
+    if (![rightImage isEqualToObject:undefinedValue]) {
+        
+//        UIImage *tmpImg = [UIImage getImageFromBase64:[rightImage toString]];
+//        tmpImg = [UIImage compressImage:tmpImg newWidth:20];
+//        
+//        [_vc.rightBtn setImage:tmpImg forState:0];
+    }
+    
+    if (![title isEqualToObject:undefinedValue]) {
+        [_vc.titleView setTitle:[title toString]forState:0];
+    }
+    
+    if (![icon isEqualToObject:undefinedValue]) {
+        
+        UIImage *imgIcon = [UIImage getImageFromBase64:[icon toString]];
+        imgIcon = [UIImage compressImage:imgIcon newWidth:20];
+        
+        [_vc.titleView setImage:imgIcon forState:0];
+    }
+    
+    if (![titleClick isEqualToObject:undefinedValue]) {
+        titleCallBack = titleClick;
+        [_vc.titleView addTarget:self action:@selector(titleBtnClicked) forControlEvents:1<<6];
+        
     }
     
     
@@ -159,16 +197,17 @@
 //        _vc.rightBtn.hidden = true;
 //    }
     
-    if (!isShowReturnButton) {
+    if (!![isShowReturnButton isEqualToObject:undefinedValue]) {
         _vc.backBtn.hidden = true;
     }
     
-    if (title) {
+    if (rightButtonTitle) {
 //        [_vc.rightBtn setTitle:title forState:0];
         [_vc.rightBtn addTarget:self action:@selector(commitBtnClicked) forControlEvents:1<<6];
     }
     
-    if ([mode isEqualToString:@"fullscreen"]) {
+    
+    if ([[mode toString] isEqualToString:@"fullscreen"]) {
         _vc.navigationController.navigationBar.hidden = true;
         
         _vc.webView.frame = [UIScreen mainScreen].bounds;
@@ -176,12 +215,15 @@
     
     else {
         _vc.navigationController.navigationBar.hidden = false;
+        
+        _vc.webView.frame = CGRectMake(0, 64, ScreenWidth, ScreenHeight-64);
     }
     
     
     if (menus) {
+        
         JSValue *test1 = [menus valueForProperty:@"test1"];
-//        NSString *color1 = [[test1 valueForProperty:@"color"] toString];
+        NSString *color1 = [[test1 valueForProperty:@"color"] toString];
         
         NSString *title1 = [[test1 valueForProperty:@"title"] toString];
         NSString *icon1 = [[test1 valueForProperty:@"icon"] toString];
@@ -190,8 +232,8 @@
         UIImage *image1 = [UIImage getImageFromBase64:icon1];
         image1 = [UIImage compressImage:image1 newWidth:20];
         
-        PopoverAction *action1 = [PopoverAction actionWithImage:image1 title:title1 handler:^(PopoverAction *action) {
-            
+        PopoverAction *action1 = [PopoverAction actionWithImage:image1 title:title1 color:[UIColor colorWithHexString:color1] handler:^(PopoverAction *action) {
+           
             [callback1 callWithArguments:nil];
             
         }];
@@ -243,17 +285,44 @@
 }
 
 
+-(void)openWindow:(JSValue *)options
+{
+    [_vc openWindow];
+}
+
+-(void)openWindowWithData:(JSValue *)options
+{
+    NSDictionary *data = [[options valueForProperty:@"data"] toDictionary];
+    NSLog(@"%@",data);
+    
+    [_vc openWindowWithData:data];
+}
+
 
 #pragma mark - CLLocationManagerDelegate
+-(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+{
+    NSLog(@"error ~ %@",error.description);
+    
+//    if (error.code == kCLErrorDenied)
+//    {
+//        NSLog(@"访问被拒绝");
+//    }
+//    if (error.code == kCLErrorLocationUnknown) {
+//        NSLog(@"无法获取位置信息");
+//    }
+}
+
 -(void)locationManager:(nonnull CLLocationManager *)manager didUpdateLocations:(nonnull NSArray<CLLocation *> *)locations
 {
+    locationTimes ++;
+    
+    if (locationTimes > 1) {
+        return;
+    }
+    
     //此处locations存储了持续更新的位置坐标值，取最后一个值为最新位置，如果不想让其持续更新位置，则在此方法中获取到一个值之后让locationManager stopUpdatingLocation
     CLLocation *currentLocation = [locations lastObject];
-    
-    //    NSTimeInterval locationAge = [currentLocation.timestamp timeIntervalSinceNow];
-    //    if (locationAge > 1.0){//如果调用已经一次，不再执行
-    //        return;
-    //    }
     
     NSLog(@"每当请求到位置信息时, 都会调用此方法");
     
@@ -274,14 +343,19 @@
              }
              
              NSLog(@"定位完成:%@",city);
-             //系统会一直更新数据，直到选择停止更新，因为我们只需要获得一次经纬度即可，所以获取之后就停止更新
-             [manager stopUpdatingLocation];
+             
+             if (currentLocation.horizontalAccuracy > 0) {//已经定位成功了
+                 [manager stopUpdatingLocation];
+                 
+             }
              
              NSString *latitude = [NSString stringWithFormat:@"%.6f",currentLocation.coordinate.latitude];
              
              NSString *longitude = [NSString stringWithFormat:@"%.6f",currentLocation.coordinate.longitude];
              
-             [callback callWithArguments:@[@{@"latitude":latitude, @"longitude":longitude}]];
+             NSLog(@"latitude:%@ longitude:%@",latitude,longitude);
+             
+             [gpsCallBack callWithArguments:@[@{@"latitude":latitude, @"longitude":longitude}]];
          }
          
          else if (error == nil && [array count] == 0)
@@ -294,12 +368,13 @@
              NSLog(@"An error occurred = %@", error);
          }
      }];
-    
-    
 }
 
 #pragma mark - Private Method
 - (void)locate{
+    
+    NSLog(@"locate");
+    
     // 判断定位操作是否被允许
     if([CLLocationManager locationServicesEnabled]) {
         //定位初始化
@@ -307,6 +382,10 @@
         self.locationM.delegate = self;
         self.locationM.desiredAccuracy = kCLLocationAccuracyBest;
         self.locationM.distanceFilter = 10;
+        if (iOS8Later) {
+            //iOS8及以上添加这句
+            [self.locationM requestWhenInUseAuthorization];
+        }
         [self.locationM startUpdatingLocation];//开启定位
     }else {
         //提示用户无法进行定位操作
@@ -345,6 +424,11 @@
     [callback callWithArguments:nil];
 }
 
+-(void)titleBtnClicked
+{
+    [titleCallBack callWithArguments:nil];
+}
+
 
 - (UIViewController *)topViewController {
     UIViewController *resultVC;
@@ -365,6 +449,41 @@
     }
     return nil;
 }
+
+- (void)shareWebPageToPlatformType:(UMSocialPlatformType)platformType
+{
+    //创建分享消息对象
+    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+    
+    //创建网页内容对象
+    NSString* thumbURL =  @"https://mobile.umeng.com/images/pic/home/social/img-1.png";
+    UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:@"欢迎使用【友盟+】社会化组件U-Share" descr:@"欢迎使用【友盟+】社会化组件U-Share，SDK包最小，集成成本最低，助力您的产品开发、运营与推广！" thumImage:thumbURL];
+    //设置网页地址
+    shareObject.webpageUrl = @"http://mobile.umeng.com/social";
+    
+    //分享消息对象设置分享内容对象
+    messageObject.shareObject = shareObject;
+    
+    //    UMSocialPlatformType
+    //调用分享接口
+    [[UMSocialManager defaultManager] shareToPlatform:UMSocialPlatformType_Sina messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
+        if (error) {
+            UMSocialLogInfo(@"************Share fail with error %@*********",error);
+        }else{
+            if ([data isKindOfClass:[UMSocialShareResponse class]]) {
+                UMSocialShareResponse *resp = data;
+                //分享结果消息
+                UMSocialLogInfo(@"response message is %@",resp.message);
+                //第三方原始返回的数据
+                UMSocialLogInfo(@"response originalResponse data is %@",resp.originalResponse);
+                
+            }else{
+                UMSocialLogInfo(@"response data is %@",data);
+            }
+        }
+    }];
+}
+
 
 
 

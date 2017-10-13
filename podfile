@@ -1,0 +1,8 @@
+target 'LvXiu_iOS' do
+
+pod ‘UMengUShare/UI’
+pod ‘UMengUShare/Social/ReducedWeChat’
+pod ‘UMengUShare/Social/ReducedQQ’
+pod ‘UMengUShare/Social/ReducedSina'
+
+end

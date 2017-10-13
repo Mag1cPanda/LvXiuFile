@@ -1,16 +1,15 @@
 //
 //  UIImage+Extension.m
-//  JYJ微博
+//  LvXiu_iOS
 //
-//  Created by JYJ on 15/3/11.
-//  Copyright (c) 2015年 JYJ. All rights reserved.
+//  Created by panshen on 2017/9/21.
+//  Copyright © 2017年 panshen. All rights reserved.
 //
 
 #import "UIImage+Extension.h"
 #import <objc/message.h>
 
 @implementation UIImage (Extension)
-
 
 + (UIImage *)createImageWithColor:(UIColor *)color {
     CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
@@ -22,6 +21,5 @@
     UIGraphicsEndImageContext();
     return theImage;
 }
-
 
 @end

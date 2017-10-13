@@ -52,11 +52,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LvXiu_iOS/JSExport/LvXiu.m"
-            timestampString = "527595747.430883"
+            timestampString = "529493447.211455"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "183"
-            endingLineNumber = "183"
+            startingLineNumber = "160"
+            endingLineNumber = "160"
             landmarkName = "-setActionBar:"
             landmarkType = "7">
          </BreakpointContent>

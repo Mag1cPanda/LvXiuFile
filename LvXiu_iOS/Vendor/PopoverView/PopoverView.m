@@ -361,9 +361,13 @@ static NSString *kPopoverCellIdentifier = @"kPopoverCellIdentifier";
         cell = [[PopoverViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kPopoverCellIdentifier];
     }
     
-    [cell setAction:_actions[indexPath.row]];
+    PopoverAction *action = _actions[indexPath.row];
+    
+    [cell setAction:action];
     [cell showBottomLine: indexPath.row < _actions.count - 1];
     cell.style = _style;
+    
+    [cell.button setTitleColor:action.color forState:0];
     
     return cell;
 }

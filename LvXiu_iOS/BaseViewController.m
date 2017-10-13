@@ -134,11 +134,24 @@
 
 
 #pragma mark - lazy
+-(UIButton *)titleView
+{
+    if (!_titleView) {
+        _titleView = [UIButton buttonWithType:UIButtonTypeCustom];
+        _titleView.frame = CGRectMake(0, 0, 100, 40);
+        [_titleView setTitleColor:[UIColor blackColor] forState:0];
+        _titleView.titleLabel.font = LRFont(14);
+    }
+    return _titleView;
+}
+
 -(UIButton *)backBtn
 {
     if (!_backBtn) {
         _backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         _backBtn.frame = CGRectMake(0, 0, 44, 44);
+//        _backBtn.backgroundColor = [UIColor redColor];
+        _backBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 20);
         [_backBtn addTarget:self action:@selector(backAction) forControlEvents:1 << 6];
         [_backBtn setImage:[UIImage imageNamed:@"back"] forState:0];
         
@@ -151,6 +164,8 @@
     if (!_rightBtn) {
         _rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         _rightBtn.frame = CGRectMake(0, 0, 44, 44);
+//        _rightBtn.backgroundColor = [UIColor redColor];
+        _rightBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 20, 0, 0);
         [_rightBtn addTarget:self action:@selector(backAction) forControlEvents:1 << 6];
         [_rightBtn setImage:[UIImage imageNamed:@"parent"] forState:0];
         
@@ -161,7 +176,7 @@
 -(LRWebView *)webView
 {
     if (!_webView) {
-        _webView = [[LRWebView alloc] initWithFrame:CGRectMake(0, 64, ScreenWidth, ScreenHeight-64-30)];
+        _webView = [[LRWebView alloc] initWithFrame:CGRectMake(0, 64, ScreenWidth, ScreenHeight-64)];
     }
     
     return _webView;

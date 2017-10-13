@@ -13,13 +13,6 @@ float const PopoverViewCellHorizontalMargin = 15.f; ///< 水平边距
 float const PopoverViewCellVerticalMargin = 3.f; ///< 垂直边距
 float const PopoverViewCellTitleLeftEdge = 8.f; ///< 标题左边边距
 
-@interface PopoverViewCell ()
-
-@property (nonatomic, strong) UIButton *button;
-@property (nonatomic, weak) UIView *bottomLine;
-
-@end
-
 @implementation PopoverViewCell
 
 #pragma mark - Life Cycle
@@ -88,6 +81,7 @@ float const PopoverViewCellTitleLeftEdge = 8.f; ///< 标题左边边距
     return [UIFont systemFontOfSize:15.f];
 }
 
+
 /*! @brief 底部线条颜色 */
 + (UIColor *)bottomLineColorForStyle:(PopoverViewStyle)style {
     return style == PopoverViewStyleDefault ? [UIColor colorWithRed:0.75 green:0.75 blue:0.75 alpha:1.00] : [UIColor colorWithRed:0.4 green:0.4 blue:0.4 alpha:1.00];
@@ -96,6 +90,11 @@ float const PopoverViewCellTitleLeftEdge = 8.f; ///< 标题左边边距
 - (void)setAction:(PopoverAction *)action {
     [_button setImage:action.image forState:UIControlStateNormal];
     [_button setTitle:action.title forState:UIControlStateNormal];
+    
+    if (action.color) {
+        [_button setTitleColor:action.color forState:UIControlStateNormal];
+    }
+    
     _button.titleEdgeInsets = action.image ? UIEdgeInsetsMake(0, PopoverViewCellTitleLeftEdge, 0, -PopoverViewCellTitleLeftEdge) : UIEdgeInsetsZero;
 }
 

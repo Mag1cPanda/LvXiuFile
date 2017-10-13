@@ -20,6 +20,7 @@
 
 @property (nonatomic, strong) LRWebView *webView;
 
+@property (nonatomic, strong) UIButton *titleView;
 
 @property (nonatomic, strong) NJKWebViewProgressView *progressView;
 @property (nonatomic, strong) NJKWebViewProgress *progressProxy;

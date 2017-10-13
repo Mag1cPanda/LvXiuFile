@@ -10,4 +10,7 @@
 
 @interface LvXiuViewController : BaseViewController
 
+-(void)openWindow;
+-(void)openWindowWithData:(NSDictionary *)dic;
+
 @end

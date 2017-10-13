@@ -1,9 +1,9 @@
 //
 //  LRNavigationController.m
-//  CarRecordCarOwner
+//  LvXiu_iOS
 //
-//  Created by Mag1cPanda on 2017/3/14.
-//  Copyright © 2017年 Mag1cPanda. All rights reserved.
+//  Created by panshen on 2017/9/21.
+//  Copyright © 2017年 panshen. All rights reserved.
 //
 
 #import "LRNavigationController.h"

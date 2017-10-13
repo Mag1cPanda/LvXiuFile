@@ -8,6 +8,7 @@
 
 #import "PopoverAction.h"
 
+
 @interface PopoverAction ()
 
 @property (nonatomic, strong, readwrite) UIImage *image; ///< 图标
@@ -28,7 +29,22 @@
     action.title = title ? : @"";
     action.handler = handler ? : NULL;
     
+    action.color = [UIColor blackColor];
+    
     return action;
 }
+
++ (instancetype)actionWithImage:(UIImage *)image title:(NSString *)title color:(UIColor *)color handler:(void (^)(PopoverAction *))handler
+{
+    PopoverAction *action = [[self alloc] init];
+    action.image = image;
+    action.title = title ? : @"";
+    action.handler = handler ? : NULL;
+    
+    action.color = color ? : [UIColor blackColor];
+    
+    return action;
+}
+
 
 @end
