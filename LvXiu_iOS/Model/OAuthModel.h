@@ -18,4 +18,8 @@
 @property (nonatomic, copy) NSString  *usid;
 @property (nonatomic, copy) NSString  *unionId;
 
++(instancetype)modelWithDict:(NSDictionary *)dic;
+
+-(instancetype)initWithDict:(NSDictionary *)dic;
+
 @end

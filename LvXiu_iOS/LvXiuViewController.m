@@ -7,6 +7,7 @@
 //
 
 #import "LvXiuViewController.h"
+#import "LxBridge.h"
 #import "LvXiu.h"
 #import "LxStorage.h"
 #import "LxShare.h"
@@ -145,6 +146,10 @@ UMSocialShareMenuViewDelegate>
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
     
     JSContext *ctx = [webView valueForKeyPath:@"documentView.webView.mainFrame.javaScriptContext"];
+    
+    LxBridge *bridge = [LxBridge new];
+    ctx[@"lvxiu"] = bridge;
+    
     LvXiu *lx = [[LvXiu alloc] init];
     
     //用WebView执行某段JS代码

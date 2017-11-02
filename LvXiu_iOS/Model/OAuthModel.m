@@ -10,4 +10,21 @@
 
 @implementation OAuthModel
 
+-(void)setValue:(id)value forUndefinedKey:(NSString *)key
+{
+    NSLog(@"forUndefinedKey -> %@",key);
+}
+
+-(instancetype)initWithDict:(NSDictionary *)dic
+{
+    [self setValuesForKeysWithDictionary:dic];
+    return self;
+}
+
++(instancetype)modelWithDict:(NSDictionary *)dic
+{
+    return [[self alloc] initWithDict:dic];
+}
+
+
 @end

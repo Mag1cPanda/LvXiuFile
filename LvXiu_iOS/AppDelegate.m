@@ -22,18 +22,13 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    /* 打开调试日志 */
     [[UMSocialManager defaultManager] openLog:YES];
     
-    /* 设置友盟appkey */
     [[UMSocialManager defaultManager] setUmSocialAppkey:@"59cf4b9b5312dd8173000550"];
     
     [self configUSharePlatforms];
     
-    //利用Category+Runtime实现自定义浏览器UA
     [NSMutableURLRequest setupUserAgentOverwrite];
-    
-    
     
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];

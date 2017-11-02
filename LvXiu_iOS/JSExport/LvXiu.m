@@ -98,16 +98,15 @@
 -(NSString *)parseApiUrl:(JSValue *)options
 {
     NSLog(@"URLSuffix ~ %@",options);
-
+//    [_vc.webView ]
     NSString *suffix = [options toString];
     if (suffix.length > 0) {
-        return [NSString stringWithFormat:@"http://test.lvxiu.96007.cc/%@",suffix];
+        return [NSString stringWithFormat:@"http://webtest.lvxiu.96007.cc/%@",suffix];
     }
 
     else {
-        return @"http://test.lvxiu.96007.cc/";
+        return @"http://webtest.lvxiu.96007.cc/";
     }
-
 }
 
 
